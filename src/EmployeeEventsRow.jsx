@@ -1,8 +1,50 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import './App.css';
+import ReactModal from 'react-modal';
+
+const customStyle = {
+  overlay : {
+    position          : 'fixed',
+    top               : '0px',
+    left              : '0px',
+    right             : '0px',
+    bottom            : '0px',
+    backgroundColor   : 'rgba(0,0,0,.5)',
+    zIndex: 9999
+  },
+  content : {
+    position                   : 'absolute',
+    top                        : '40px',
+    left                       : '40px',
+    right                      : '40px',
+    bottom                     : '40px',
+    background                 : '#fff',
+    overflow                   : 'auto',
+    WebkitOverflowScrolling    : 'touch',
+    borderRadius               : '4px',
+    outline                    : 'none',
+    padding                    : '20px',
+    boxShadow                 : '0 7px 17px 0 rgba(0,0,0,.15)'
+  }
+};
 class EmployeeEventsRow extends Component {
-  getStyleForEvent (event,calendar){
+
+  constructor(props) {
+    super(props);
+    this.state = {showModal: false};
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  handleOpenModal() {
+    this.setState({ showModal: true });
+  }
+  handleCloseModal () {
+    this.setState({ showModal: false });
+  }
+
+  getStyleForEvent (event,calendar) {
 
     var columnWidth=57.14;
     var from=moment(event.from);
@@ -22,16 +64,15 @@ class EmployeeEventsRow extends Component {
 
   render() {
     var employeeEvents=this.props.employee.events;
-    console.log("this.props",this.props);
+    //console.log("this.props",this.props);
     var calendar=this.props.calendar;
-    var handleOpenModal=this.props.handleOpenModal;
     var printEvents=[];
     var printDays=[];
 
     for (var i=0;i<35;i++){
       printDays.push(
         <div className="day-element">
-          <div className="add-shift js-add-shift" onClick={handleOpenModal}>+</div>
+          <div className="add-shift js-add-shift" onClick={this.handleOpenModal}>+</div>
         </div>
       )
     }
@@ -56,6 +97,13 @@ class EmployeeEventsRow extends Component {
       <div className="cat-row single" key={this.props.employee.firstName}>
         {printDays}
         {printEvents}
+        <ReactModal
+            isOpen={this.state.showModal}
+            style={customStyle}
+            contentLabel="Minimal Modal Example"
+            ariaHideApp={false}>
+           <button onClick={this.handleCloseModal}>Close Modal</button>
+         </ReactModal>
       </div>
     );
   }
