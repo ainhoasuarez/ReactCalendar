@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 
 class Search extends Component {
-  constructor() {
-    super();
-  }
+  
   handleChange(e) {
-    console.log("handling change",e.target.value)
     this.props.handleSearch(e.target.value);
   }
+
   render() {
+    console.log("render Search")
     return (
       <div className="search-employee-wrapper">
         <i className="fa fa-search"/>

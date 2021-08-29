@@ -1,19 +1,18 @@
-
-
 function Week(args) {
     this.days = [];
-    this.number;
-    this.month;
 
     //initialization
     var init = function (day) {
         for (var i = 1; i <= 7; i++) {
             this.days.push(day.clone().isoWeekday(i));
+            
         }
         this.number = day.isoWeek();
         this.month = day.format('MMMM');
         this.year = day.format('YYYY');
-    }.call(this, args.day);
+    };
+    
+    init.call(this, args.day);
 
 }
 

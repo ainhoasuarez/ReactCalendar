@@ -4,23 +4,20 @@ import Day from './Day.jsx';
 
 class Week extends Component {
   render() {
-    var printWeeks=[];
-    var returnedWeeks=this.props.weeklyCalendar.getWeeks();
-    console.log("weeklyCalendar",returnedWeeks);
-
-    returnedWeeks.forEach(function(week,i){
-      printWeeks.push(<div className="week" key={i}>
-        <div className="number">
-          {week.month} {week.year}
-        </div>
-        <Day weekDays={week.days} />
-      </div>)
-    });
+    var returnedWeeks = this.props.weeklyCalendar.getWeeks();
+    console.log("render Week", returnedWeeks);
 
     return (
-        <div className="cal-nav">
-          {printWeeks}
-        </div>
+      <div className="cal-nav">
+        {returnedWeeks.map((week, i) => (
+          <div className="week" key={i}>
+            <div className="number">
+              {week.month} {week.year}
+            </div>
+            <Day weekDays={week.days} />
+          </div>
+        ))}
+      </div>
     );
   }
 }

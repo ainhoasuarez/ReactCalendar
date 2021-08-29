@@ -30,18 +30,19 @@ class GanttChart extends Component {
   }
 
   render() {
+    console.log('render GanttChart');
     var printEmployeeRows = [];
     var employees = this.props.employees;
     var calendar = this.state.weeklyCalendar;
     var handleOpenModal = this.props.handleOpenModal;
     var searchText = this.props.searchText;
     var lcSearchText = searchText.toLowerCase();
-    
+
     employees.forEach(function (employee, i) {
       var lcFirstName = employee.firstName.toLowerCase();
       var lcLastName = employee.lastName.toLowerCase();
       var repeatText = (lcFirstName.indexOf(lcSearchText) !== -1 || lcLastName.indexOf(lcSearchText) !== -1);
-      if (!searchText || (searchText != '' && repeatText)) {
+      if (!searchText || (searchText !== '' && repeatText)) {
         printEmployeeRows.push(
           <EmployeeEventsRow employee={employee} key={i} handleOpenModal={handleOpenModal} calendar={calendar} />
         )

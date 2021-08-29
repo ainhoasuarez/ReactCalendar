@@ -4,7 +4,6 @@ import './App.css';
 import Employees from './Employees.jsx';
 import GanttChart from './GanttChart.jsx';
 import moment from 'moment';
-import ReactModal from 'react-modal';
 import Search from './Search.jsx';
 
 class App extends Component {
@@ -23,18 +22,14 @@ class App extends Component {
       searchText:''
     };
   }
-
   
   handleSearch(searchText) {
     this.setState({searchText: searchText});
   }
 
   update(day,event){
-
     var currentEmployees=this.state.employees;
-
     var selectedEmployee=Math.floor(event.nativeEvent.offsetY/45);
-
     var currentDayFormatted=day.format('YYYY-MM-DD');
     var nextDayFormatted=moment(currentDayFormatted).add(1,'days').format('YYYY-MM-DD');
     var newelement={from:currentDayFormatted,to:nextDayFormatted,type:'vacation'};
@@ -44,12 +39,12 @@ class App extends Component {
       employees:currentEmployees
     });
   }
+  
   render() {
     return (
       <div className="gantt">
         
         <Search handleSearch={this.handleSearch.bind(this)}></Search>
-
         <Employees employees={this.state.employees}  searchText={this.state.searchText} />
         <GanttChart searchText={this.state.searchText} employees={this.state.employees} handleOpenModal={this.handleOpenModal} handleUpdate={this.update.bind(this)}/>
           

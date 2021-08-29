@@ -3,11 +3,11 @@ import './App.css';
 
 class Column extends Component {
   render() {
-
+    console.log('render Colum');
+    
     return (
       <div className="column">
       </div>
-
     );
   }
 }

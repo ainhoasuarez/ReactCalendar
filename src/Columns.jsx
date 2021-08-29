@@ -8,20 +8,14 @@ class Columns extends Component {
   }
 
   render() {
-    var printColumns=[];
     var days=this.props.weeklyCalendar.flattenDays();
 
-    var self=this;
-    days.forEach(function(day,i){
-      printColumns.push(
-        <div data-date={day.format('YYYY-MM-DD')} onClick={self.handleUpdate.bind(this,day)} className={"column "+ (day.isToday() ? 'today ':'') +(day.isWeekend() ? 'weekend':'')} key={i}></div>
-      )
-    })
     return (
       <div className="columns">
-        {printColumns}
-    </div>
-
+        {days.map((day,i) => (
+        <div data-date={day.format('YYYY-MM-DD')} onClick={this.handleUpdate.bind(this,day)} className={"column "+ (day.isToday() ? 'today ':'') +(day.isWeekend() ? 'weekend':'')} key={i}></div>
+        ))}
+      </div>
     );
   }
 }

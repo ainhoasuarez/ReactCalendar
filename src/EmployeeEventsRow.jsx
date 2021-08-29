@@ -45,7 +45,6 @@ class EmployeeEventsRow extends Component {
   }
 
   getStyleForEvent (event,calendar) {
-
     var columnWidth=57.14;
     var from=moment(event.from);
     var to=moment(event.to);
@@ -63,15 +62,15 @@ class EmployeeEventsRow extends Component {
   }
 
   render() {
+    console.log("render EmployeeEventsRow",this.props);
     var employeeEvents=this.props.employee.events;
-    //console.log("this.props",this.props);
     var calendar=this.props.calendar;
     var printEvents=[];
     var printDays=[];
 
     for (var i=0;i<35;i++){
       printDays.push(
-        <div className="day-element">
+        <div className="day-element" key={i}>
           <div className="add-shift js-add-shift" onClick={this.handleOpenModal}>+</div>
         </div>
       )
@@ -85,10 +84,13 @@ class EmployeeEventsRow extends Component {
         currentEvents.push(event);
       }
     })
+
     var that=this;
-    currentEvents.forEach(function(event,i){
+    currentEvents.forEach(function(event,i) {
       printEvents.push(
-        <div className="event bright-green" key={i} style={that.getStyleForEvent(event,calendar)}>
+        <div className="event bright-green" key={i} style={that.useMemo(() => {
+          return that.getStyleForEvent(event,calendar);
+        }, [event,calendar])}>
         </div>
       )
     })
