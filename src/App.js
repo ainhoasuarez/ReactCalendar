@@ -3,12 +3,10 @@ import employeeArray from "./employeeArray.js";
 import './App.css';
 import Employees from './Employees.jsx';
 import GanttChart from './GanttChart.jsx';
-import WeeklyCalendar from './WeeklyCalendar.js';
 import moment from 'moment';
 import ReactModal from 'react-modal';
 import Search from './Search.jsx';
 
-var calendar= new WeeklyCalendar();
 class App extends Component {
 
   constructor(props) {
@@ -22,7 +20,6 @@ class App extends Component {
     })
     this.state = {
       employees:lotsOfEmployees,
-      weeklyCalendar: calendar,
       searchText:''
     };
   }
@@ -32,21 +29,6 @@ class App extends Component {
     this.setState({searchText: searchText});
   }
 
-  prevWeek(){
-    var currentCalendar=this.state.weeklyCalendar;
-    currentCalendar.prevWeek();
-    this.setState({
-      weeklyCalendar:currentCalendar
-    })
-  }
-
-  nextWeek(){
-    var currentCalendar=this.state.weeklyCalendar;
-    currentCalendar.nextWeek();
-    this.setState({
-      weeklyCalendar:currentCalendar
-    })
-  }
   update(day,event){
 
     var currentEmployees=this.state.employees;
@@ -65,21 +47,11 @@ class App extends Component {
   render() {
     return (
       <div className="gantt">
-        <div className="row calendar-buttons">
-          <button type="button" onClick={this.prevWeek.bind(this)} className="btn btn-default btn-rounded waves-effect waves-light">
-             <span className="btn-label"><i className="fa fa-arrow-left"></i>
-             </span>Anterior
-           </button>
-           <button type="button" onClick={this.nextWeek.bind(this)}  className="btn btn-default btn-rounded waves-effect waves-light">
-              Siguiente
-              <span className="btn-label btn-label-right"><i className="fa fa-arrow-right"></i>
-              </span>
-            </button>
-        </div>
+        
         <Search handleSearch={this.handleSearch.bind(this)}></Search>
 
         <Employees employees={this.state.employees}  searchText={this.state.searchText} />
-        <GanttChart weeklyCalendar={this.state.weeklyCalendar} searchText={this.state.searchText} employees={this.state.employees} handleOpenModal={this.handleOpenModal} handleUpdate={this.update.bind(this)}/>
+        <GanttChart searchText={this.state.searchText} employees={this.state.employees} handleOpenModal={this.handleOpenModal} handleUpdate={this.update.bind(this)}/>
           
       </div>
     );
