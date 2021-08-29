@@ -1,0 +1,25 @@
+Aclaraciones:
+
+        **Durante la realización de esta prueba, es la primera vez que he tenido oportunidad de trabajar con React. 
+        
+        PROBLEMA PRINCIPAL DE LA APLICACIÓN:
+        
+        - Estamos causando una re-renderización de todo nuestro árbol de estado cada vez que cambia el valor de un componente.
+        
+        Acciones principales para arreglar esto:
+        
+        - Intentar colocar cada uno de los estados junto con sus respectivas funciones dentro de componentes separados 
+        o al nivel del componente oportuno como subcomponente.
+        - Se ha tratado de generar una arquitectura basada en servicios pero ha sido immposible implementar por tiempo.
+        - Se ha intentado realizar la implementación de la función .memo() para las altas cargas de datos, pero no se conseguía resultado.
+        - Se ha reaorganizado el código y optimizado todo lo que ha sido posible, pero no se ha logrado que la performace no 
+        sufra con la actualización de los datos, únicamente la apertura del modal. 
+        - Se ha realizado la refactorización de código a lo largo del proyecto. Al no conocer las convenciones de React, disculpas anticipadas.
+        - Finalmente, se ha conseguido un resultado en el rendimiento del Modal, pero aún así la solución no es del todo correcta, 
+        ya que se genera un componente modal por cada casilla de usuario, y entiendo que lo optimo sería tener un modal al que 
+        poder pasarle los datos necesarios para realizar su función.
+        - También se ha reubicado los botones de Anterior y Siguiente, aunque siguen dependiendo del estado que maneja
+        el componente de las filas de eventos de los usuarios y no ha dado tiempo de implementarlos como un 
+        subcomponente adecuadamente.
+
+Gracias por su tiempo!

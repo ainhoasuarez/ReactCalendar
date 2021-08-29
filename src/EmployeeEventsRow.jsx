@@ -75,24 +75,19 @@ class EmployeeEventsRow extends Component {
         </div>
       )
     }
-    var currentEvents=[];
-    employeeEvents.forEach(function(event,i){
+    
+    employeeEvents.forEach(function(event,i) {
       var fromDate=moment(event.from);
       var firstDayOfCurrentCalendar=calendar.getFirstDay();
       var lastDayOfCurrentCalendar=calendar.getLastDay();
       if (fromDate.isBetween(firstDayOfCurrentCalendar, lastDayOfCurrentCalendar)){
-        currentEvents.push(event);
+        printEvents.push(
+          <div className="event bright-green" key={i} style={this.useMemo(() => {
+            return this.getStyleForEvent(event,calendar);
+          }, [event,calendar])}>
+          </div>
+        )
       }
-    })
-
-    var that=this;
-    currentEvents.forEach(function(event,i) {
-      printEvents.push(
-        <div className="event bright-green" key={i} style={that.useMemo(() => {
-          return that.getStyleForEvent(event,calendar);
-        }, [event,calendar])}>
-        </div>
-      )
     })
 
     return (

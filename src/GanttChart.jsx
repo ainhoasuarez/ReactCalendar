@@ -20,7 +20,6 @@ class GanttChart extends Component {
       weeklyCalendar: currentCalendar
     })
   }
-
   nextWeek() {
     var currentCalendar = this.state.weeklyCalendar;
     currentCalendar.nextWeek();
@@ -34,7 +33,6 @@ class GanttChart extends Component {
     var printEmployeeRows = [];
     var employees = this.props.employees;
     var calendar = this.state.weeklyCalendar;
-    var handleOpenModal = this.props.handleOpenModal;
     var searchText = this.props.searchText;
     var lcSearchText = searchText.toLowerCase();
 
@@ -44,7 +42,7 @@ class GanttChart extends Component {
       var repeatText = (lcFirstName.indexOf(lcSearchText) !== -1 || lcLastName.indexOf(lcSearchText) !== -1);
       if (!searchText || (searchText !== '' && repeatText)) {
         printEmployeeRows.push(
-          <EmployeeEventsRow employee={employee} key={i} handleOpenModal={handleOpenModal} calendar={calendar} />
+          <EmployeeEventsRow employee={employee} key={i} calendar={calendar} />
         )
       }
     });
